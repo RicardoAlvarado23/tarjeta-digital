@@ -1,0 +1,44 @@
+<header class="sticky-header">
+    <!-- Header Menu  -->
+    <div class="header-nav">
+        <div class="container-fluid container-1600">
+            <div class="nav-container">
+                <!-- Site Logo -->
+                <div class="site-logo">
+                    <a routerLink='/'><img src="assets/img/logo_blanco.png" style="max-width: 180px;" class="w-100" alt="Logo"></a>
+                </div>
+
+                <!-- Main Menu -->
+                <div class="nav-menu d-lg-flex align-items-center">
+
+                    <!-- Navbar Close Icon -->
+                    <div class="navbar-close">
+                        <div class="cross-wrap"><span></span><span></span></div>
+                    </div>
+
+                    <!-- Mneu Items -->
+                    <div class="menu-items">
+                        <ul>
+                            <li><a style="cursor: default;">&nbsp;</a></li>
+                            <li><a style="cursor: default;">&nbsp;</a></li>
+                        </ul>
+                    </div>
+                    <!-- Pushed Item -->
+                    <div class="nav-pushed-item"></div>
+                </div>
+
+                <!-- Navbar Extra  -->
+                <div class="navbar-extra d-lg-block d-flex align-items-center">
+                    <!-- Navbtn -->
+                    <div class="navbar-btn nav-push-item">
+                        <a routerLink='/solicitud' class="main-btn main-btn-3" *ngIf="mostrarLink">Solicitala Aquí</a>
+                    </div>
+                    <!-- Navbar Toggler -->
+                    <div class="navbar-toggler">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

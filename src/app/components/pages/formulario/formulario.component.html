@@ -1,0 +1,99 @@
+<app-header1></app-header1>
+<section class="position-relative  py-5 home-only-flex flex-grow-1  bg-white  home-registration" id="homex">
+    <section class="section-identificacion">
+        <div class="section-center">
+            <div class="identificacion-img-logo">
+                <img [src]="ruta" @fadeInRight/>
+            </div>
+            <div class="home-registration-form bg-white" @fadeInLeft>
+                <h4 class="text-danger font-weight-200">Simple, Rápido y Seguro</h4>
+                <h4 class="form-heading text-danger mt-2 text-uppercase">Ingresa tus datos y Apertura tu Tarjeta</h4>
+                <p class="text-secondary">Para poder aperturar tu tarjeta digital debes ser mayor de 18 años y tener nacionalidad peruana.</p>
+                <form class="registration-form" id="registration-form" [formGroup]="form">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-0">
+                                <mat-form-field appearance="standard" class="w-100 mat-fs-14">
+                                    <mat-label>Número de DNI</mat-label>
+                                    <mat-icon matSuffix>featured_video</mat-icon>
+                                    <input #input placeholder="Ingrese su número de DNI" maxlength="8" matInput required formControlName="dni" [textMask]="maskDocumento" autocomplete="off">
+                                    <mat-hint align="end">{{input.value?.length || 0}}/8</mat-hint>
+                                    <mat-error *ngIf="isControlHasError('dni','required')">
+                                        <strong>Por favor, ingrese el número de DNI</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('dni','minlength')">
+                                        <strong>No es un DNI válido</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('dni','maxlength')">
+                                        <strong>No es un DNI válido</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-0">
+                                <mat-form-field appearance="standard" class="w-100 mat-fs-14">
+                                    <mat-label>Correo Electrónico</mat-label>
+                                    <mat-icon matSuffix>mark_as_unread</mat-icon>
+                                    <input #email placeholder="Ingrese su email" formControlName="email" matInput required maxlength="56" autocomplete="off">
+                                    <mat-hint align="end">{{email.value?.length || 0}}/56</mat-hint>
+                                    <mat-error *ngIf="isControlHasError('email','required')">
+                                        <strong>Por favor, ingrese su correo electrónico</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('email','email')">
+                                        <strong>No es un email válido</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="form-group mb-0">
+                                <mat-form-field appearance="standard" class="w-100 mat-fs-14">
+                                    <mat-label>Celular</mat-label>
+                                    <mat-icon matSuffix>phone_iphone</mat-icon>
+                                    <input #celular placeholder="Ingrese su número de celular" formControlName="celular" maxlength="9" [textMask]="maskDocumento" matInput required autocomplete="off">
+                                    <mat-hint align="end">{{celular.value?.length || 0}}/9</mat-hint>
+                                    <mat-error *ngIf="isControlHasError('celular','required')">
+                                        <strong>Por favor, ingrese su número de celular</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('celular','minlength')">
+                                        <strong>No es un celular válido</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('celular','maxlength')">
+                                        <strong>No es un celular válido</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-lg-12" style="display: flex;justify-content: center;">
+                            <ngx-recaptcha2 #captchaElem [siteKey]="sitekey" (reset)="handleReset()" (expire)="handleExpire()" (load)="handleLoad()" (success)="handleSuccess($event)" [useGlobalDomain]="useGlobalDomain" [size]="size" [hl]="lang" [theme]="theme" [type]="type" formControlName="captcha">
+                            </ngx-recaptcha2>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="">
+                                <mat-checkbox class="small text-justify " name="agree" formControlName="agree">
+                                    He leído y acepto el <a href="https://www.cajasullana.pe/wp-content/uploads/2019/01/anexo-01-Enunciado-del-Tratamiento-de-Datos-Personales-en-Medio-Digitales.pdf" class="d-inline color-link" target="_blank">aviso de Privacidad y Política de Protección de Datos Personales
+                                  </a>
+                                </mat-checkbox>
+                                <!--<p class="xss-text text-secondary text-justify">Caja Sullana se compromete a que los datos proporcionados en éste formato tendrán un tratamiento y protección de conformidad con la Ley N°29733 Ley de Protección de Datos Personales y su Reglamento aprobado mediante
+                                    DS N°003-2013 y sus modificatorias.
+                                </p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <button [disabled]="form.invalid" (click)="enviar()" [ngClass]="{'waves-effect': form.valid}" class="btn btn-custom home-btn-width my-3 waves-light t-16">Siguiente</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</section>
+<app-footer1></app-footer1>

@@ -28,7 +28,7 @@ import { environment, MASK_DOC_NUMBER } from 'src/environments/environment';
             transform: 'translateX(20px)',
             opacity: 0
           }),
-          animate(`400ms cubic-bezier(0.35, 0, 0.25, 1)`, style({
+          animate(`600ms cubic-bezier(0.35, 0, 0.25, 1)`, style({
             transform: 'translateX(0)',
             opacity: 1
           }))
@@ -42,6 +42,7 @@ export class FormularioComponent implements OnInit {
   maskDocumento = {};
   sitekey = environment.keyRecaptcha;
   ruta = './assets/img/illustration/pj_03.png';
+  mostrarConfirmacion = false;
 
   public captchaIsLoaded = false;
   public captchaSuccess = false;
@@ -75,7 +76,7 @@ export class FormularioComponent implements OnInit {
   }
 
   enviar() {
-
+    this.mostrarConfirmacion = true;
   }
 
 

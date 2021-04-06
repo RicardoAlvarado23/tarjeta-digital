@@ -1,6 +1,6 @@
 <app-header1></app-header1>
 <section class="position-relative  py-5 home-only-flex flex-grow-1  bg-white  home-registration" id="homex">
-    <section class="section-identificacion">
+    <section class="section-identificacion" *ngIf="!mostrarConfirmacion" @fadeInRight>
         <div class="section-center">
             <div class="identificacion-img-logo">
                 <img [src]="ruta" @fadeInRight/>
@@ -94,6 +94,52 @@
             </div>
         </div>
     </section>
+    <section class="container" *ngIf="mostrarConfirmacion" @fadeInRight>
+        <div class="section-token w-100">
+            <div class="container">
+                <div class="d-flex w-100">
+                    <div class="position-relative d-flex w-100">
+                        <div class="elementor-section">
+                            <div class="elementor-container-form" @fadeInLeft>
+                                <div class="w-100">
+                                    <h1 class="text-center titulo mb-4">Hola Ricardo,</h1>
+                                    <p class="text-center mb-4">Ingresa el token que te hemos enviado un token a tu correo electrónico <span class="text-primary">ralvarado@cajasullana.pe</span>. </p>
+                                    <div class="subscribe-form-two">
+                                        <div class="form-group">
+                                            <input type="text" class="text-token-form" placeholder="Ingrese el Token" />
+                                            <br>
+                                            <button type="submit" class="btn-submit-form">
+                                                <span class="txt">
+                                                    <i class="fa fa-search"></i>
+                                                    Continuar
+                                                </span>
+                                            </button>
+                                            <h2 class="text-reenviar">Si no has recibido el token puede reenviarlo en 60 segundos.</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="elementor-image-left">
+                            <div class="elementor-widget-container">
+                                <div class="elementor-image">
+                                    <img width="1331" height="1907" src="./assets/img/illustration/05.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="elementor-image-right">
+                            <div class="elementor-widget-container">
+                                <div class="elementor-image">
+                                    <img width="2048" height="1460" src="./assets/img/illustration/06.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+
+    </section>
 </section>
 <app-footer1></app-footer1>

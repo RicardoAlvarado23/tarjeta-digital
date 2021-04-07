@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ReCaptcha2Component } from 'ngx-captcha';
 import { environment, MASK_DOC_NUMBER } from 'src/environments/environment';
 
@@ -58,7 +59,9 @@ export class FormularioComponent implements OnInit {
   @ViewChild('captchaElem') captchaElem: ReCaptcha2Component;
   @ViewChild('langInput') langInput: ElementRef;
 
-  constructor(private cdr: ChangeDetectorRef) { 
+  constructor(private cdr: ChangeDetectorRef,
+              private router: Router
+    ) { 
     this.maskDocumento = { mask: MASK_DOC_NUMBER, guide: false };
   }
 
@@ -77,6 +80,10 @@ export class FormularioComponent implements OnInit {
 
   enviar() {
     this.mostrarConfirmacion = true;
+  }
+
+  validarCliente() {
+    this.router.navigateByUrl('/validacion');
   }
 
 

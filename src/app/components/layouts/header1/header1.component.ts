@@ -12,7 +12,7 @@ export class Header1Component implements OnInit {
 
   constructor(private router: Router) {
     const ruta = this.router.url;
-    if (ruta.indexOf('solicitud') != -1) {
+    if (ruta.indexOf('solicitud') != -1 ||  ruta.indexOf('validacion') != -1) {
       this.mostrarLink = false;
     } else {
       this.mostrarLink = true;

@@ -1,0 +1,112 @@
+.ant-card-bordered,
+.api-container table {
+    border: 1px solid #e6ebf1;
+}
+
+.ant-card {
+    margin: 0 0 20px;
+    padding: 0;
+    color: #455560;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    position: relative;
+    background: #fff;
+    border-radius: .625rem;
+}
+
+.ant-card.active {
+    border-color: transparent;
+    box-shadow: 0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%);
+}
+
+.ant-card-hoverable {
+    cursor: pointer;
+    transition: box-shadow .3s, border-color .3s;
+}
+
+.ant-card-body {
+    padding: 20px;
+}
+
+.ant-card-body::before {
+    display: table;
+    content: '';
+}
+
+.ant-card-body::after {
+    display: table;
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.img-ant {
+    max-width: 75px;
+    max-height: 75px;
+}
+
+.avatar-xs {
+    height: 2rem;
+    width: 2rem;
+}
+
+.avatar-title {
+    align-items: center;
+    background-color: #5b73e8;
+    color: #fff;
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.font-size-22 {
+    font-size: 22px!important;
+}
+
+.bg-soft-primary {
+    background-color: rgba(91, 115, 232, .25)!important;
+}
+
+.bg-soft-danger {
+    background-color: rgba(220, 53, 69, .25)!important;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}
+
+.font-size-16 {
+    font-size: 16px!important;
+}
+
+.section-elementor-cam {
+    background-color: #f7f4fd;
+    transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 70px 70px 40px;
+    border-radius: 15px;
+    width: 100%;
+    animation-duration: 1.25s;
+    position: relative;
+}
+
+.elementor-bg-overlay {
+    border-radius: 15px;
+    background-image: url(https://n.foxdsgn.com/deva/wp-content/uploads/2021/01/Group2.png);
+    background-position: 900px 25px;
+    background-repeat: no-repeat;
+    background-size: 39% auto;
+    opacity: .2;
+    transition: background .3s, border-radius .3s, opacity .3s;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}

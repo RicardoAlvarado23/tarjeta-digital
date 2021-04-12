@@ -1,6 +1,12 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { Cuestionario, Respuesta } from '../../../models/cuestionario.model';
+import { AppState } from '../../../app.reducers';
+import { Subscription } from 'rxjs';
+import { Cliente } from '../../../models/cliente.model';
 declare var $: any;
 
 @Component({
@@ -46,25 +52,40 @@ declare var $: any;
     ])
   ]
 })
-export class ValidacionComponent implements OnInit {
+export class ValidacionComponent implements OnInit, OnDestroy {
 
-  respuestas = [
-    {valor: '1', etiqueta: 'Respuesta 1'},
-    {valor: '2', etiqueta: 'Respuesta 2'},
-    {valor: '3', etiqueta: 'Respuesta 3'},
-    {valor: '4', etiqueta: 'Respuesta 4'},
-    {valor: '5', etiqueta: 'Respuesta 5'}
-  ];
+  respuestas: Respuesta[] = [];
+
+  cuestionario: Cuestionario;
   
   mostrarPaginaUno = true;
   mostrarPaginaDos = false;
   mostrarPaginaTres = false;
   @ViewChild('templateCam', { static: true }) templateCam: TemplateRef<any>;
   dialogFloat: any;
+  cliente: Cliente;
+  private suscriptionCliente: Subscription;
 
-  constructor( private dialog: MatDialog,) { }
+  constructor( private dialog: MatDialog,
+               private http: HttpClient,
+               private store: Store<AppState>
+    ) {
+
+      }
+
 
   ngOnInit(): void {
+    this.suscriptionCliente = this.store.select('cliente').subscribe(({cliente}) => {
+      console.log(cliente);
+      this.cliente = cliente;
+      console.log(this.cliente);
+      this.obtenerCuestionario();
+    });
+    // this.obtenerCuestionario();
+  }
+
+  ngOnDestroy(): void {
+    this.suscriptionCliente.unsubscribe();
   }
 
   paginaDos() {
@@ -94,6 +115,46 @@ export class ValidacionComponent implements OnInit {
     this.dialogFloat = this.dialog.open(this.templateCam, {
       maxWidth: '40vw'
     });
+  }
+
+
+  obtenerCuestionario() {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('TJDIGITAL:Qk55cHdhb3QhZ29MWkM9Q1pCUFRO') });
+    this.http.post('http://localhost:8082/cmac-tarjeta-digital/panel/obtener-cuestionario', {
+      tipoDocumento: this.cliente.tipoDocumento,
+      doi: this.cliente.numeroDocumento,
+      celular: this.cliente.celular
+    }, {
+      headers
+    }).subscribe((data: any) => {
+      console.log(data);
+      if (data.success) {
+        this.cuestionario = data.viso_cuestionario;
+        console.log(this.cuestionario);
+        const preguntas = this.cuestionario.Preguntas;
+        for (let index = 0; index < preguntas.length; index++) {
+          const respuesta = new Respuesta(preguntas[index].CodPregunta);
+          this.respuestas.push(respuesta);
+        }
+        console.log(this.cuestionario);
+        console.log(this.respuestas);
+        console.log(this.validarCuestionarioCompleto());
+      }
+    })
+  }
+
+  setAlternativaPregunta(codigoPregunta, codigoAlernativa) {
+    console.log({codigoPregunta, codigoAlernativa});
+  }
+
+  validarCuestionarioCompleto() {
+    let completados = 0;
+    this.respuestas.forEach((rpta) => {
+      if (rpta.codigoRespuesta) {
+        completados++;
+      }
+    });
+    return completados == this.respuestas.length
   }
 
 }

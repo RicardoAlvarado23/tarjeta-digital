@@ -2,8 +2,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ReCaptcha2Component } from 'ngx-captcha';
 import { environment, MASK_DOC_NUMBER } from 'src/environments/environment';
+import { AppState } from '../../../app.reducers';
+import { setCliente } from './formulario.actions';
+import { Cliente } from '../../../models/cliente.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,7 +64,8 @@ export class FormularioComponent implements OnInit {
   @ViewChild('langInput') langInput: ElementRef;
 
   constructor(private cdr: ChangeDetectorRef,
-              private router: Router
+              private router: Router,
+              private store: Store<AppState>
     ) { 
     this.maskDocumento = { mask: MASK_DOC_NUMBER, guide: false };
   }
@@ -83,6 +88,13 @@ export class FormularioComponent implements OnInit {
   }
 
   validarCliente() {
+    const { dni, email, celular } = this.form.value;
+    const cliente =  new Cliente();
+    cliente.celular = celular;
+    cliente.email = email;
+    cliente.numeroDocumento = dni;
+    cliente.tipoDocumento = '1';
+    this.store.dispatch(setCliente({cliente}))
     this.router.navigateByUrl('/validacion');
   }
 

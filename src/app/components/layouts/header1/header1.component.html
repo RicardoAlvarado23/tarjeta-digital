@@ -32,6 +32,7 @@
                     <!-- Navbtn -->
                     <div class="navbar-btn nav-push-item">
                         <a routerLink='/solicitud' class="main-btn main-btn-3" *ngIf="mostrarLink">Solicitala Aquí</a>
+                        <span *ngIf="mostrarCountDown" class="mr-5 font-weight-bold"><i class="fa fa-clock font-weight-bold text-danger mr-2"></i><countdown class="text-danger mr-5 font-weight-bold" [config]="{leftTime: time, format: 'm:s'}"></countdown></span>
                     </div>
                     <!-- Navbar Toggler -->
                     <div class="navbar-toggler">

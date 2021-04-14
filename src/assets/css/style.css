@@ -7959,6 +7959,10 @@ mat-form-field.mat-fs-14 {
     font-size: 14px;
 }
 
+.btn-custom:hover {
+    color: #fff;
+}
+
 .btn-custom {
     background-color: #ee6352;
 }

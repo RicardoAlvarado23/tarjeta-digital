@@ -24,3 +24,9 @@ export class Respuesta {
         this.codigoPregunta = codigoPregunta;
     }
 }
+
+export class VisoResult {
+    CodError: string;
+    CodEvaFin: string;
+    Estado: string;
+}

@@ -3,7 +3,7 @@ import { Cliente } from '../../../models/cliente.model';
 import { setCliente } from './formulario.actions';
 
 export interface State {
-    cliente: Cliente; 
+    cliente: Cliente;
 }
 
 export const initialState: State = {
